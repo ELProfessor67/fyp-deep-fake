@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Home Page{% endblock %}
+
+{% block content %}
+<div class="container-fluid" style="margin-top: 80px !important;">
+    {%if prediction%}
+        <h1 class="h1 text-center">Detection</h1>
+
+        <div class="card shadow max-w-md mx-auto mt-5" style="max-width: 40rem;">
+            <div class="card-body reletive">
+                <p class="h3 mb-3">Prediction: <span class="text-uppercase">{{ prediction }}</span></p>
+                <p class="h4 mb-3">
+                    <div>
+                        Real: {{ confidences.real }}%
+                        <div class="progress mb-2">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: {{ confidences.real }}%" aria-valuenow="{{ confidences.real }}" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    
+
+                    <div>
+                        Fake: {{ confidences.fake }}%
+                        <div class="progress">
+                            <div class="progress-bar bg-danger" role="progressbar" style="width: {{ confidences.fake }}%" aria-valuenow="{{ confidences.fake}}" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    
+                </p>
+
+                <p class="h3 mb-1">Mask Image</p>
+                <img src="{{ face_with_mask }}" alt="Detected Face" style="width: 20rem" />
+
+            </div>
+        </div>
+    {% else %}
+        <h1 class="h1 text-center">DeepFake Image Detection</h1>
+
+        <div class="card shadow max-w-md mx-auto mt-5" style="max-width: 40rem;">
+            <div class="card-body">
+                <h5 class="card-title text-center">Upload File</h5>
+                <p class="card-text text-center text-muted">Choose a file and click "Detect Now" to proceed.</p>
+
+                <!-- File Upload Form -->
+                <form class="text-center" enctype="multipart/form-data" action="{% url 'image' %}" method="post">
+                    {%csrf_token%}
+                    <div class="mb-3">
+                        <label for="fileInput" class="form-label">Select File</label>
+                        <input type="file" class="form-control" id="fileInput" name="file" required accept="image/*">
+                    </div>
+                    <button type="submit" class="btn btn-success">Detect Now</button>
+                </form>
+            </div>
+        </div>
+    {% endif %}
+
+</div>
+{% endblock %}
+

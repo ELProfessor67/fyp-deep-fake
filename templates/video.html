@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{%load static%}
+{%block content%}
+<div class="bg">
+    <div class="container">
+       
+        <div class="row align-items-center justify-content-center">
+            <div class="col-12 my-auto" style="margin-top: 80px !important;">
+                <h1 class="h1 text-center mb-5">DeepFake Video Detection</h1>
+                <div class="width-400" style="width: 40rem;">
+                    <video width="100%" controls id="videos" style="height: 30rem; object-fit: contain;">
+                        <source src="" id="video_source">
+                        Your browser does not support HTML5 video.
+                    </video>
+                    <form class="form" method="POST" enctype="multipart/form-data" name="video-upload" id="video-upload"
+                        class="text-center mt-3">
+                        <h5 class="card-title text-center mb-2">Upload File</h5>
+                        <p class="card-text text-center text-muted">Choose a file and click "Detect Now" to proceed.</p>
+
+                        {%csrf_token%}
+                        <div class="form-group">
+                            <label>{{form.upload_video_file.widget}}</label>
+                            {{form.upload_video_file}}
+                            <!-- <input type="file" id="{{form.upload_video_file.id_for_label}}" name="{{form.upload_video_file.name}}" /> -->
+                            {%if form.upload_video_file.errors%}
+                            {%for each_error in form.upload_video_file.errors%}
+                            <div class="alert alert-danger mt-1 {{form.upload_video_file.id_for_label}}">
+                                {{each_error}}
+                            </div>
+                            {%endfor%}
+                            {%endif%}
+                        </div>
+                        <div class="form-group">
+                            <!-- <label for="{{form.sequence_length.id_for_label}}">{{form.sequence_length.label}}: </label><span
+                            id="slider-value"></span> -->
+                            <input type="number" value="60" hidden="true" id="{{form.sequence_length.id_for_label}}"
+                                name="{{form.sequence_length.name}}"></input>
+                            <!-- <div id='slider'></div> -->
+                            {%if form.sequence_length.errors%}
+                            {%for each_error in form.sequence_length.errors%}
+                            <div class="alert alert-danger mt-1 {{form.sequence_length.id_for_label}}">
+                                {{each_error}}
+                            </div>
+                            {%endfor%}
+                            {%endif%}
+                        </div>
+                        <div style="display: flex !important; align-items: center !important; justify-content: center !important;">
+                            <button id="videoUpload" type="submit" name="submit"
+                            class="btn btn-success mt-3 btn-block mx-auto">Upload</button>
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}
+
+{%block js_cripts%}
+<script src="{%static 'js/script.js'%}"></script>
+{% endblock %}

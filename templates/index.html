@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% block title %}Home Page{% endblock %}
+{% load static %}
+
+{% block content %}
+<!-- Hero Section -->
+<header class="bg-primary text-white text-center py-5">
+    <div class="container">
+        <h1 class="display-4">Unveil Digital Truth</h1>
+        <p class="lead">Advanced AI-powered deepfake detection for a safer digital world</p>
+        <a href="/images" class="btn btn-light btn-lg mt-3">Try It Now</a>
+    </div>
+</header>
+
+<!-- Features Section -->
+<section id="features" class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">Key Features</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <i class="bi bi-shield-check text-primary display-4 mb-3"></i>
+                        <h5 class="card-title">99.9% Accuracy</h5>
+                        <p class="card-text">Our state-of-the-art AI ensures near-perfect detection rates.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <i class="bi bi-lightning-charge text-primary display-4 mb-3"></i>
+                        <h5 class="card-title">Real-time Analysis</h5>
+                        <p class="card-text">Get instant results with our lightning-fast processing.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <i class="bi bi-graph-up text-primary display-4 mb-3"></i>
+                        <h5 class="card-title">Continuous Learning</h5>
+                        <p class="card-text">Our AI evolves to detect even the most sophisticated deepfakes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works Section -->
+<section id="how-it-works" class="bg-light py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">How It Works</h2>
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <img src="{% static 'images/working.jpg' %}" alt="How It Works" class="img-fluid rounded">
+            </div>
+            <div class="col-md-6">
+                <ol class="list-group list-group-numbered">
+                    <li class="list-group-item">Upload your image or video</li>
+                    <li class="list-group-item">Our AI analyzes the content</li>
+                    <li class="list-group-item">Receive a detailed authenticity report</li>
+                    <li class="list-group-item">Make informed decisions based on the results</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Pricing Section -->
+<section id="latest-news" class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5">Latest News</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="https://www.nvp.com/wp-content/uploads/2024/10/Deepfake-AI-photo-or-video-in-phone.jpg" class="card-img-top" alt="AI Conference">
+                    <div class="card-body">
+                        <h5 class="card-title">DeepFake Detector at AI Conference 2023</h5>
+                        <p class="card-text">Our team presented groundbreaking research on deepfake detection at the International AI Conference.</p>
+                        <a href="https://spectrum.ieee.org/real-time-deepfakes" class="btn btn-primary" target="_blank">Read More</a>
+                    </div>
+                    <div class="card-footer text-muted">
+                        2 days ago
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="https://imageio.forbes.com/specials-images/imageserve/65aebb1942f08f946c1d9b3b//960x0.jpg?format=jpg&width=1440" class="card-img-top" alt="New Algorithm">
+                    <div class="card-body">
+                        <h5 class="card-title">New Algorithm Improves Detection Accuracy</h5>
+                        <p class="card-text">Our latest algorithm update has pushed deepfake detection accuracy to an unprecedented 99.9%.</p>
+                        <a href="https://www.nvp.com/blog/deepfake-detection-solutions-ai-new-frontier-phishing-attacks/" class="btn btn-primary" target="_blank">Read More</a>
+                    </div>
+                    <div class="card-footer text-muted">
+                        1 week ago
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="https://asset-cache.spyscape.com/5c0e9889898796ef30e9d756/63bfe4d5b7f77a0407fd565d_r_cVvMSvy8sYJyz6jvuSNo2_OD_ZEy_sO3Ml6Uyiu42huADJp2IBtIKq3dI41XzJWtBpLl6ET3wjTdoXgqPv8DtsITrQHpHgY4rV59ukh1UjC-Xck9-MpoW4I4nz5lgNxdPsszuuWLJOT-6Z6U6V3MHmPsSGygx2_bWatAcn8J_Ev-juMLsBd3KzPdrX7g.jpeg" class="card-img-top" alt="Partnership Announcement">
+                    <div class="card-body">
+                        <h5 class="card-title">Strategic Partnership with Tech Giant</h5>
+                        <p class="card-text">We're excited to announce our partnership with a leading tech company to combat deepfakes globally.</p>
+                        <a href="https://www.prnewswire.com/news-releases/reality-defender-partners-with-taskus-to-expand-deepfake-detection-to-content-moderation-teams-and-call-centers-302312230.html" class="btn btn-primary" target="_blank">Read More</a>
+                    </div>
+                    <div class="card-footer text-muted">
+                        2 weeks ago
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- Call to Action -->
+<section class="bg-primary text-white text-center py-5">
+    <div class="container">
+        <h2>Ready to Unveil the Truth?</h2>
+        <p class="lead">Start detecting deepfakes today and protect yourself from digital deception.</p>
+        <a href="/images" class="btn btn-light btn-lg mt-3">Get Started</a>
+    </div>
+</section>
+{% endblock %}
