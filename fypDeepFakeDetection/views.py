@@ -26,12 +26,69 @@ from PIL import Image as pImage
 import time
 from django.conf import settings
 from .forms import VideoUploadForm
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
+from django.contrib.auth.models import User
 
 def Home(request):
     return render(request, 'index.html')
 
 def About(request):
     return render(request, 'about.html')
+
+def Login(request):
+    if request.method == "POST":
+        # Using .get() instead of directly accessing keys
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+
+        # Check if both fields are provided
+        if not email or not password:
+            messages.error(request, "Please enter both email and password.")
+            return redirect("login")
+
+        # Authenticate user
+        user = authenticate(request, username=email, password=password)
+
+        if user is not None:
+            login(request, user)
+            messages.success(request, "Login successful!")
+            return redirect("home")  # Redirect to a home page or dashboard
+        else:
+            messages.error(request, "Invalid email or password")
+            return redirect("login")
+
+    return render(request, 'login.html')
+
+
+
+def Register(request):
+    if request.method == "POST":
+        name = request.POST.get("name")
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+        confirm_password = request.POST.get("confirm_password")
+
+        # Check if passwords match
+        if password != confirm_password:
+            messages.error(request, "Passwords do not match")
+            return redirect("register")
+
+        # Check if user with this email already exists
+        if User.objects.filter(email=email).exists():
+            messages.error(request, "An account with this email already exists")
+            return redirect("register")
+
+        # Create new user with email as username
+        user = User.objects.create_user(username=email, email=email, password=password, first_name=name)
+        user.save()
+
+        messages.success(request, "Registration successful! Please login.")
+        return redirect("login")
+
+    return render(request, 'register.html')
+
 
 
 
