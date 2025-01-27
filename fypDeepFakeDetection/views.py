@@ -30,6 +30,9 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
+from history.models import VideoProcessingResult,UserImage
 
 def Home(request):
     return render(request, 'index.html')
@@ -90,8 +93,36 @@ def Register(request):
     return render(request, 'register.html')
 
 
+def logoutUser(request):
+    logout(request)
+    return redirect('/')
+
+@login_required
+def Profile(request):
+    images = UserImage.objects.filter(user=request.user)
+    processing_results = VideoProcessingResult.objects.filter(user=request.user)
+
+    videos = []
+
+    for result in processing_results:
+        # You can access the preprocessed images, cropped faces, and heatmaps as lists
+        preprocessed_images = result.get_preprocessed_images()
+        faces_cropped_images = result.get_faces_cropped_images()
+        heatmap_images = result.get_heatmap_images()
+
+        videos.append({
+            'original_video': result.original_video,
+            'output': result.output,
+            'confidence': result.confidence,
+            'preprocessed_images': preprocessed_images,
+            'faces_cropped_images': faces_cropped_images,
+            'heatmap_images': heatmap_images,
+            'image': preprocessed_images[0]
+        })
+    return render(request,'profile.html',{"images": images,"videos": videos})
 
 
+@login_required
 def Image(request):
     if request.method == "POST":
         return predictImage(request)
@@ -291,6 +322,8 @@ def allowed_video_file(filename):
         return True
     else: 
         return False
+
+@login_required
 def Video(request):
     if request.method == 'GET':
         video_upload_form = VideoUploadForm()
@@ -453,6 +486,21 @@ def predict_page(request):
                 'output': output,
                 'confidence': confidence
             }
+
+            processing_result = VideoProcessingResult.objects.create(
+                user=request.user,
+                original_video=production_video_name,
+                models_location=os.path.join('models'),
+                output=output,
+                confidence=confidence
+            )
+
+            # Save image lists
+            processing_result.set_preprocessed_images(preprocessed_images)
+            processing_result.set_faces_cropped_images(faces_cropped_images)
+            processing_result.set_heatmap_images(heatmap_images)
+            processing_result.save()
+
 
             if settings.DEBUG:
                 return render(request, predict_template_name, context)

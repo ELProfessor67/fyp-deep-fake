@@ -70,7 +70,13 @@
                     <a href="/login" class="btn btn-primary py-2 px-4">Login</a>
                 {% else %}
                     <!-- Display User's Name when Logged In -->
-                    <p class="text-white mb-0">Hello, {{ user.first_name|default:user.username }}!</p>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Hello, {{ user.first_name|default:user.username }}!</a>
+                        <div class="dropdown-menu m-0">
+                            <a href="/logout-user" class="dropdown-item">Logout</a>
+                            <a href="/profile" class="dropdown-item">Profile</a>
+                        </div>
+                    </div>
                 {% endif %}
                 </div>
             </nav>
@@ -111,7 +117,7 @@
         
                         <h4 class="text-center text-primary mb-3">Detected Mask Image</h4>
                         <div class="text-center">
-                            <img src="{{ face_with_mask }}" alt="Detected Face" class="img-fluid rounded shadow" style="max-width: 100%; max-height: 400px; object-fit: cover;">
+                            <img src="{% static face_with_mask %}" alt="Detected Face" class="img-fluid rounded shadow" style="max-width: 100%; max-height: 400px; object-fit: cover;">
                         </div>
                     </div>
                 </div>
@@ -156,16 +162,11 @@
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Contact Us</h4>
-                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>123 AI Lab Street, San Francisco, USA
+                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>University of Management and Technology C-II, Johar Town, Lahore.
                         </p>
-                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
-                        <p class="mb-2"><i class="fa fa-envelope me-3"></i>contact@deepfakedetection.com</p>
-                        <div class="d-flex pt-2">
-                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
-                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
-                        </div>
+                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+92 42 35212801-10</p>
+                        <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@umt.edu.pk</p>
+                        
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Detection Model
@@ -175,16 +176,7 @@
                         <h5 class="text-light fw-normal">Upcoming Features</h5>
                         <p>Incorporating voice recognition to combat audio-based deepfakes.</p>
                     </div>
-                    <div class="col-lg-3 col-md-6">
-                        <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Newsletter</h4>
-                        <p>Stay updated with the latest advancements in deepfake detection.</p>
-                        <div class="position-relative mx-auto" style="max-width: 400px;">
-                            <input class="form-control border-primary w-100 py-3 ps-4 pe-5" type="email"
-                                placeholder="Your email">
-                            <button type="button"
-                                class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">Subscribe</button>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>
